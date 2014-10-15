@@ -57,23 +57,29 @@ function openSurfLocation(evt) {
     var oDialog = new sap.m.Dialog({
         title: 'Surf Analytics for ' + evt.target.innerHTML,
         class: "sapUiPopupWithPadding",
+        stretch: true,
         content: [
             new sap.m.IconTabBar({
                 items: [
                     new sap.m.IconTabFilter({
-                        title: 'Tab 1',
+                        text: 'Tab 1',
+                        icon: 'sap-icon://product',
+                        content: [
+                            new sap.m.Image({
+                                src: "/img/15_1Laird_Hamilton_.jpg"
+                            })
+                        ]
+                    }),
+                    new sap.m.IconTabFilter({
+                        text: 'Tab 2',
                         icon: 'sap-icon://product'
                     }),
                     new sap.m.IconTabFilter({
-                        title: 'Tab 2',
+                        text: 'Tab 3',
                         icon: 'sap-icon://product'
                     }),
                     new sap.m.IconTabFilter({
-                        title: 'Tab 3',
-                        icon: 'sap-icon://product'
-                    }),
-                    new sap.m.IconTabFilter({
-                        title: 'Tab 4',
+                        text: 'Tab 4',
                         icon: 'sap-icon://product'
                     })
                 ]
