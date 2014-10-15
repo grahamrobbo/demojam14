@@ -1,24 +1,23 @@
 <<<<<<< HEAD
-earth
-=====
+DemoJam 2014 Idea
+=================
 
-**NOTE: the location of `dev-server.js` has changed from `{repository}/server/` to `{repository}/`**
+Note this uses a project called [earth](https://github.com/cambecc/earth)
 
 "earth" is a project to visualize global weather conditions.
 
 A customized instance of "earth" is available at http://earth.nullschool.net.
 
-"earth" is a personal project I've used to learn javascript and browser programming, and is based on the earlier
-[Tokyo Wind Map](https://github.com/cambecc/air) project.  Feedback and contributions are welcome! ...especially
-those that clarify accepted best practices.
+"earth" is based on the earlier
+[Tokyo Wind Map](https://github.com/cambecc/air) project.
 
 building and launching
 ----------------------
 
-After installing node.js and npm, clone "earth" and install dependencies:
+After installing node.js and npm, clone "demojam14" and install dependencies:
 
-    git clone https://github.com/cambecc/earth
-    cd earth
+    git clone https://github.com/cambecc/demojam14
+    cd demojam14
     npm install
 
 Next, launch the development web server:
