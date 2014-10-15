@@ -126,6 +126,19 @@ body {
     pointer-events: all;
 }
 
+#status, #nearest, #menu {
+    font-size: 1.75rem;
+}
+
+#status, #nearest, #earth {
+    background-color: rgba(0, 0, 5, 0.6);
+    border-radius: 0.5rem/0.5rem;
+    display: table;
+    margin-top: 1rem;
+    padding: 0 1rem 0 1rem;
+    pointer-events: all;
+}
+
 #menu {
     background-color: rgba(5, 10, 30, 0.85);
     border-radius: 0.5rem/0.5rem;
