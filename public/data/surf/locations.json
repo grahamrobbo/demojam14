@@ -1,9 +1,20 @@
 {
-    "locations": [{
-        "name": "Bondi"
-    }, {
-        "name": "Manly"
-    }, {
-        "name": "Narrabeen"
-    }]
+  "locations": [
+  {
+    "name": "Cronulla",
+    "spotId": "997"
+  }, {
+    "name": "Bondi",
+    "spotId": "996"
+  }, {
+    "name": "Manly",
+    "spotId": "526"
+  }, {
+    "name": "North Narrabeen",
+    "spotId": "998"
+  }, {
+    "name": "Cloudbreak - Fiji",
+    "spotId": "669"
+  }
+  ]
 }
