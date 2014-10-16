@@ -23,77 +23,9 @@
     <link rel="alternate" hreflang="ja" href="http://earth.nullschool.net/jp/" />
     <script id="sap-ui-bootstrap" src="https://sapui5.ap1.hana.ondemand.com/resources/sap-ui-cachebuster/sap-ui-core.js" data-sap-ui-libs="sap.m" data-sap-ui-theme="sap_bluecrystal" data-sap-ui-xx-bindingSyntax="complex">
     </script>
+    <script type="text/javascript" src="scripts/demojam14.js"></script>
 
 </head>
-<script type="text/javascript">
-function getNearestSurfLocations(coords) {
-    locationModel = new sap.ui.model.json.JSONModel();
-    locationModel.attachEventOnce(
-        "requestCompleted",
-        null,
-        onLocationModelLoaded
-    );
-    locationModel.loadData('/data/surf/locations.json?x=' + coords[0] + '&y=' + coords[1]);
-}
-
-function onLocationModelLoaded(event) {
-    var locations = event.getSource().getData().locations;
-
-    jQuery('#nearest').empty();
-    jQuery('#nearest').append(jQuery('<p><span id="nearest-coord">Nearest Surf Locations</span><span id="nearest-close" class="invisible text-button">✕</span></p>'));
-
-    var oList = jQuery('<ul />');
-    for (var i = 0; i < locations.length; i++) {
-        oList.append('<li class="surf-location">' + locations[i].name + '</li>');
-    }
-    jQuery('#nearest').append(oList);
-
-    jQuery('.surf-location').click(openSurfLocation);
-}
-
-function openSurfLocation(evt) {
-    console.log('open ' + evt.target.innerHTML);
-
-    var oDialog = new sap.m.Dialog({
-        title: 'Surf Analytics for ' + evt.target.innerHTML,
-        class: "sapUiPopupWithPadding",
-        stretch: true,
-        content: [
-            new sap.m.IconTabBar({
-                items: [
-                    new sap.m.IconTabFilter({
-                        text: 'Spot Info',
-                        icon: 'sap-icon://tag-cloud-chart',
-                        content: [
-                            new sap.m.Image({
-                                src: "/img/15_1Laird_Hamilton_.jpg"
-                            })
-                        ]
-                    }),
-                    new sap.m.IconTabFilter({
-                        text: 'Swell View',
-                        icon: 'sap-icon://picture'
-                    }),
-                    new sap.m.IconTabFilter({
-                        text: 'Social Feed',
-                        icon: 'sap-icon://feed'
-                    }),
-                    new sap.m.IconTabFilter({
-                        text: 'Another Test',
-                        icon: 'sap-icon://favorite'
-                    })
-                ]
-            })
-        ],
-        beginButton: new sap.m.Button({
-            text: 'Close',
-            press: function(oEvent) {
-                oEvent.getSource().getParent().close();
-            }
-        })
-    }).open();
-}
-</script>
 
 <body data-lang="en">
 
@@ -132,7 +64,7 @@ function openSurfLocation(evt) {
         <div id="nearest" />
 
         <p id="earth">
-            <span id="show-menu" class="text-button" title="menu">Weather</span>
+            <span id="show-menu" data-sap-ui="__icon0" data-sap-ui-icon-content="" class="text-button sapUiIcon sapUiIconMirrorInRTL" style="font-family: SAP-icons; color: white; font-size: 25px; cursor: default;" title="menu"></span>
             <span id="progress" class="invisible"></span>
         </p>
 
