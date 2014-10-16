@@ -819,7 +819,7 @@
                 }
             }
         }
-        getNearestSurfLocations(activeLocation.coord);
+        if(activeLocation.coord) getNearestSurfLocations(activeLocation.coord);
     }
 
     function updateLocationDetails() {
