@@ -162,9 +162,42 @@ var spotDialog = new sap.m.Dialog({
           text: 'Social Feed',
           icon: 'sap-icon://feed',
           content: [
-            new sap.m.Image({
-              src: "/img/surf-wallpaper1.jpg",
-              width: "900px"
+            new sap.m.List({
+              showSeparators: "Inner",
+              items: [
+                new sap.m.FeedListItem({
+                  sender: "Alexandra Jones",
+                  icon: "https://sapui5.ap1.hana.ondemand.com/sdk/test-resources/sap/ui/demokit/explored/img/Woman_11.png",
+                  iconDensityAware: false,
+                  info: "Request",
+                  timestamp: "March 03, 2014",
+                  text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
+                }),
+                new sap.m.FeedListItem({
+                  sender: "George Smith",
+                  icon: "https://sapui5.ap1.hana.ondemand.com/sdk/test-resources/sap/ui/demokit/explored/img/Man_01.png",
+                  iconDensityAware: false,
+                  info: "Reply",
+                  timestamp: "March 04, 2014",
+                  text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore "
+                }),
+                new sap.m.FeedListItem({
+                  sender: "Alexandra Jones",
+                  icon: "https://sapui5.ap1.hana.ondemand.com/sdk/test-resources/sap/ui/demokit/explored/img/Woman_11.png",
+                  iconDensityAware: false,
+                  info: "Request",
+                  timestamp: "March 05, 2014",
+                  text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+                }),
+                new sap.m.FeedListItem({
+                  sender: "George Smith",
+                  icon: "https://sapui5.ap1.hana.ondemand.com/sdk/test-resources/sap/ui/demokit/explored/img/Man_01.png",
+                  iconDensityAware: false,
+                  info: "Rejection",
+                  timestamp: "March 06, 2014",
+                  text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore. At vero eos et accusam et justo duo dolores et ea rebum. "
+                })
+              ]
             })
           ]
 
@@ -324,14 +357,14 @@ function tstampToDate(tstamp) {
   return oDate.toLocaleDateString() + ' ' + oDate.toLocaleTimeString();
 }
 
-function calcMaxValue(solid,faded) {
-  if(!solid) return;
-  if(!faded) return;
-  return solid+faded;
+function calcMaxValue(solid, faded) {
+  if (!solid) return;
+  if (!faded) return;
+  return solid + faded;
 }
 
 function tertiaryAvailable(readings) {
-  if(!readings) return;
+  if (!readings) return;
   return readings.tertiary ? true : false;
 }
 
