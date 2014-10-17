@@ -18,12 +18,77 @@ var spotDialog = new sap.m.Dialog({
   class: "sapUiPopupWithPadding",
   stretch: false,
   content: [
-    new sap.m.IconTabBar('iconTabBar',{
+    new sap.m.IconTabBar('iconTabBar', {
       items: [
         new sap.m.IconTabFilter('aboutSpot', {
           key: 'spotInfo',
           text: 'Spot Info',
-          icon: 'sap-icon://tag-cloud-chart'
+          icon: 'sap-icon://tag-cloud-chart',
+          content: [
+            new sap.ui.layout.Grid({
+              defaultSpan: "L12 M12 S12",
+              content: [
+                new sap.ui.layout.form.SimpleForm({
+                  minWidth: 1024,
+                  maxContainerCols: 2,
+                  editable: false,
+                  layout: "ResponsiveGridLayout",
+                  // title: "Current Conditions",
+                  title: new sap.ui.core.Title({
+                    level: 'H3',
+                    text: "Latest conditions at {path:'/0/localTimestamp',formatter:'tstampToDate'}",
+                    icon: 'http://cdnimages.magicseaweed.com/30x30/{/0/condition/weather}.png'
+                  }),
+                  labelSpanL: 4,
+                  labelSpanM: 4,
+                  emptySpanL: 1,
+                  emptySpanM: 1,
+                  columnsL: 2,
+                  columnsM: 1,
+                  content: [
+                    new sap.m.Label({
+                      text: "{/0/swell/minBreakingHeight}-{/0/swell/maxBreakingHeight} ft"
+                    }).addStyleClass('sapUI5text'),
+                    new sap.m.RatingIndicator({
+                      maxValue: "{parts:[{path:'/0/solidRating'},{path:'/0/fadedRating'}],formatter:'calcMaxValue'}",
+                      value: "{/0/solidRating}"
+                    }),
+                    new sap.m.Label({
+                      text: "Wind"
+                    }).addStyleClass('sapUI5text'),
+                    new sap.m.Text({
+                      text: "{/0/wind/speed} {/0/wind/unit}"
+                    }).addStyleClass('sapUI5text'),
+                    new sap.m.Label({
+                      text: "Primary Swell"
+                    }).addStyleClass('sapUI5text'),
+                    new sap.m.Text({
+                      text: "{/0/swell/components/primary/height} ft at {/0/swell/components/primary/period}s from {/0/swell/components/primary/compassDirection}"
+                    }).addStyleClass('sapUI5text'),
+                    new sap.m.Label({
+                      text: "Secondary Swell"
+                    }).addStyleClass('sapUI5text'),
+                    new sap.m.Text({
+                      text: "{/0/swell/components/secondary/height} ft at {/0/swell/components/secondary/period}s from {/0/swell/components/secondary/compassDirection}"
+                    }).addStyleClass('sapUI5text'),
+                    new sap.m.Label({
+                      text: "Wind Swell"
+                    }).addStyleClass('sapUI5text'),
+                    new sap.m.Text({
+                      text: "{/0/swell/components/tertiary/height} ft at {/0/swell/components/tertiary/period}s from {/0/swell/components/tertiary/compassDirection}",
+                      visible: "{path:'/0/swell/components',formatter: 'tertiaryAvailable'}"
+                    }).addStyleClass('sapUI5text'),
+                    new sap.m.Label({
+                      text: "Air Temp"
+                    }).addStyleClass('sapUI5text'),
+                    new sap.m.Text({
+                      text: "{/0/condition/temperature} °f"
+                    }).addStyleClass('sapUI5text'),
+                  ]
+                })
+              ]
+            })
+          ]
         }),
         new sap.m.IconTabFilter({
           text: 'Swell Chart',
@@ -94,23 +159,6 @@ var spotDialog = new sap.m.Dialog({
           ]
         }),
         new sap.m.IconTabFilter({
-          text: 'SST Chart',
-          icon: 'sap-icon://globe',
-          content: [
-            new sap.m.VBox({
-              items: [
-                new sap.m.Image('sstMap', {
-                  src: "/img/surf-wallpaper1.jpg",
-                  width: "900px"
-                }),
-                new sap.m.Label('sstTime', {
-                  text: "{path:'localTimestamp',formatter:'tstampToDate'}"
-                })
-              ]
-            })
-          ]
-        }),
-        new sap.m.IconTabFilter({
           text: 'Social Feed',
           icon: 'sap-icon://feed',
           content: [
@@ -137,7 +185,7 @@ var spotDialog = new sap.m.Dialog({
   beginButton: new sap.m.Button({
     text: 'Close',
     press: function (oEvent) {
-      sap.ui.getCore().byId('iconTabBar').setSelectedKey('spotInfo');
+      sap.ui.getCore().byId('iconTabBar').setSelectedKey('spotInfo').setExpanded(true);
       oEvent.getSource().getParent().close();
     }
   })
@@ -184,7 +232,7 @@ function onLocationPress(oEvent) {
 
   spotDialog.setTitle('Surf Analytics - ' + oEvent.getSource().getLabel()).open();
 
-  loadAboutSpot(oEvent.getSource().data().spotId);
+  //loadAboutSpot(oEvent.getSource().data().spotId);
 
 }
 
@@ -196,11 +244,13 @@ function loadAboutSpot(spot) {
     oText.setText('North Narrabeen');
     break;
   default:
-    oText.setText('Spot ' + spot);
-  }
+    oText.setText('Spot ' + spot); {
 
-  sap.ui.getCore().byId('aboutSpot').removeAllContent();
-  sap.ui.getCore().byId('aboutSpot').addContent(oText);
+    }
+
+    sap.ui.getCore().byId('aboutSpot').removeAllContent();
+    sap.ui.getCore().byId('aboutSpot').addContent(oText);
+  }
 }
 
 function onSpotModelLoaded(oEvent) {
@@ -212,12 +262,10 @@ function rotateImages() {
   var periodMap = sap.ui.getCore().byId('periodMap');
   var windMap = sap.ui.getCore().byId('windMap');
   var pressureMap = sap.ui.getCore().byId('pressureMap');
-  var sstMap = sap.ui.getCore().byId('sstMap');
   var swellTime = sap.ui.getCore().byId('swellTime');
   var periodTime = sap.ui.getCore().byId('periodTime');
   var windTime = sap.ui.getCore().byId('windTime');
   var pressureTime = sap.ui.getCore().byId('pressureTime');
-  var sstTime = sap.ui.getCore().byId('sstTime');
 
   if (spotModel.getData().length != chartMap.length) {
     chartMap = [];
@@ -239,12 +287,10 @@ function rotateImages() {
           if (periodMap) periodMap.setSrc(chartMap[j + 1].charts.period);
           if (windMap) windMap.setSrc(chartMap[j + 1].charts.wind);
           if (pressureMap) pressureMap.setSrc(chartMap[j + 1].charts.pressure);
-          if (sstMap) sstMap.setSrc(chartMap[j + 1].charts.sst);
           if (swellTime) swellTime.setText(tstampToDate(chartMap[j + 1].localTimestamp));
           if (periodTime) periodTime.setText(tstampToDate(chartMap[j + 1].localTimestamp));
           if (windTime) windTime.setText(tstampToDate(chartMap[j + 1].localTimestamp));
           if (pressureTime) pressureTime.setText(tstampToDate(chartMap[j + 1].localTimestamp));
-          if (sstTime) sstTime.setText(tstampToDate(chartMap[j + 1].localTimestamp));
 
           chartMap[j + 1].active = true;
         } else {
@@ -252,7 +298,6 @@ function rotateImages() {
           if (periodMap) periodMap.setSrc(chartMap[0].charts.period);
           if (windMap) windMap.setSrc(chartMap[0].charts.wind);
           if (pressureMap) pressureMap.setSrc(chartMap[0].charts.pressure);
-          if (sstMap) sstMap.setSrc(chartMap[0].charts.sst);
           chartMap[0].active = true;
         }
         chartMap[j].active = false;
@@ -264,7 +309,6 @@ function rotateImages() {
     if (periodMap) periodMap.setSrc('/img/surfer - chick.jpg');
     if (windMap) windMap.setSrc('/img/surfer - chick.jpg');
     if (pressureMap) pressureMap.setSrc('/img/surfer - chick.jpg');
-    if (sstMap) sstMap.setSrc('/img/surfer - chick.jpg');
   }
 }
 
@@ -273,8 +317,6 @@ function loadCharts(charts) {
   $.get(charts.period);
   $.get(charts.wind);
   $.get(charts.pressure);
-  $.get(charts.sst);
-
 }
 
 function tstampToDate(tstamp) {
@@ -282,9 +324,20 @@ function tstampToDate(tstamp) {
   return oDate.toLocaleDateString() + ' ' + oDate.toLocaleTimeString();
 }
 
+function calcMaxValue(solid,faded) {
+  if(!solid) return;
+  if(!faded) return;
+  return solid+faded;
+}
+
+function tertiaryAvailable(readings) {
+  if(!readings) return;
+  return readings.tertiary ? true : false;
+}
+
 function swellImg(img) {
   if (!img) return;
   return '<img src="' + img + '" class="swellImg" style="width:900px;display:none">';
 }
 
-setInterval(rotateImages, 500);
+setInterval(rotateImages, 200);
