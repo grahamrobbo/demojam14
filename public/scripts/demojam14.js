@@ -36,8 +36,8 @@ var spotDialog = new sap.m.Dialog({
                   // title: "Current Conditions",
                   title: new sap.ui.core.Title({
                     level: 'H3',
-                    text: "Latest conditions at {path:'/0/localTimestamp',formatter:'tstampToDate'}",
-                    icon: 'http://cdnimages.magicseaweed.com/30x30/{/0/condition/weather}.png'
+                    text: "Latest conditions at {path:'spot>/0/localTimestamp',formatter:'tstampToDate'}",
+                    icon: 'http://cdnimages.magicseaweed.com/30x30/{spot>/0/condition/weather}.png'
                   }),
                   labelSpanL: 4,
                   labelSpanM: 4,
@@ -47,42 +47,43 @@ var spotDialog = new sap.m.Dialog({
                   columnsM: 1,
                   content: [
                     new sap.m.Label({
-                      text: "{/0/swell/minBreakingHeight}-{/0/swell/maxBreakingHeight} ft"
+                      text: "{spot>/0/swell/minBreakingHeight}-{spot>/0/swell/maxBreakingHeight} ft"
                     }).addStyleClass('sapUI5text'),
                     new sap.m.RatingIndicator({
-                      maxValue: "{parts:[{path:'/0/solidRating'},{path:'/0/fadedRating'}],formatter:'calcMaxValue'}",
-                      value: "{/0/solidRating}"
+                      maxValue: "{parts:[{path:'spot>/0/solidRating'},{path:'spot>/0/fadedRating'}],formatter:'calcMaxValue'}",
+                      value: "{spot>/0/solidRating}",
+                      enabled: false
                     }),
                     new sap.m.Label({
                       text: "Wind"
                     }).addStyleClass('sapUI5text'),
                     new sap.m.Text({
-                      text: "{/0/wind/speed} {/0/wind/unit}"
+                      text: "{spot>/0/wind/speed} {spot>/0/wind/unit}"
                     }).addStyleClass('sapUI5text'),
                     new sap.m.Label({
                       text: "Primary Swell"
                     }).addStyleClass('sapUI5text'),
                     new sap.m.Text({
-                      text: "{/0/swell/components/primary/height} ft at {/0/swell/components/primary/period}s from {/0/swell/components/primary/compassDirection}"
+                      text: "{spot>/0/swell/components/primary/height} ft at {spot>/0/swell/components/primary/period}s from {spot>/0/swell/components/primary/compassDirection}"
                     }).addStyleClass('sapUI5text'),
                     new sap.m.Label({
                       text: "Secondary Swell"
                     }).addStyleClass('sapUI5text'),
                     new sap.m.Text({
-                      text: "{/0/swell/components/secondary/height} ft at {/0/swell/components/secondary/period}s from {/0/swell/components/secondary/compassDirection}"
+                      text: "{spot>/0/swell/components/secondary/height} ft at {spot>/0/swell/components/secondary/period}s from {spot>/0/swell/components/secondary/compassDirection}"
                     }).addStyleClass('sapUI5text'),
                     new sap.m.Label({
                       text: "Wind Swell"
                     }).addStyleClass('sapUI5text'),
                     new sap.m.Text({
-                      text: "{/0/swell/components/tertiary/height} ft at {/0/swell/components/tertiary/period}s from {/0/swell/components/tertiary/compassDirection}",
-                      visible: "{path:'/0/swell/components',formatter: 'tertiaryAvailable'}"
+                      text: "{spot>/0/swell/components/tertiary/height} ft at {spot>/0/swell/components/tertiary/period}s from {spot>/0/swell/components/tertiary/compassDirection}",
+                      visible: "{path:'spot>/0/swell/components',formatter: 'tertiaryAvailable'}"
                     }).addStyleClass('sapUI5text'),
                     new sap.m.Label({
                       text: "Air Temp"
                     }).addStyleClass('sapUI5text'),
                     new sap.m.Text({
-                      text: "{/0/condition/temperature} °f"
+                      text: "{spot>/0/condition/temperature} °f"
                     }).addStyleClass('sapUI5text'),
                   ]
                 })
@@ -101,7 +102,7 @@ var spotDialog = new sap.m.Dialog({
                   width: "900px"
                 }),
                 new sap.m.Label('swellTime', {
-                  text: "{path:'localTimestamp',formatter:'tstampToDate'}"
+                  text: "{path:'spot>localTimestamp',formatter:'tstampToDate'}"
                 })
               ]
             })
@@ -118,7 +119,7 @@ var spotDialog = new sap.m.Dialog({
                   width: "900px"
                 }),
                 new sap.m.Label('periodTime', {
-                  text: "{path:'localTimestamp',formatter:'tstampToDate'}"
+                  text: "{path:'spot>localTimestamp',formatter:'tstampToDate'}"
                 })
               ]
             })
@@ -135,7 +136,7 @@ var spotDialog = new sap.m.Dialog({
                   width: "900px"
                 }),
                 new sap.m.Label('windTime', {
-                  text: "{path:'localTimestamp',formatter:'tstampToDate'}"
+                  text: "{path:'spot>localTimestamp',formatter:'tstampToDate'}"
                 })
               ]
             })
@@ -152,7 +153,7 @@ var spotDialog = new sap.m.Dialog({
                   width: "900px"
                 }),
                 new sap.m.Label('pressureTime', {
-                  text: "{path:'localTimestamp',formatter:'tstampToDate'}"
+                  text: "{path:'spot>localTimestamp',formatter:'tstampToDate'}"
                 })
               ]
             })
@@ -222,7 +223,7 @@ var spotDialog = new sap.m.Dialog({
       oEvent.getSource().getParent().close();
     }
   })
-}).setModel(spotModel);
+}).setModel(spotModel,"spot");
 
 function getNearestSurfLocations(coords) {
   console.log('getLoc');
@@ -238,13 +239,13 @@ function onLocationModelLoaded(event) {
     content: [
       new sap.m.List({
         items: {
-          path: '/locations',
+          path: 'location>/locations',
           template: new sap.m.DisplayListItem({
             type: "Navigation",
             press: onLocationPress,
-            label: '{name}',
+            label: '{location>name}',
           }).data({
-            'spotId': '{spotId}'
+            'spotId': '{location>spotId}'
           })
         }
       })
@@ -256,7 +257,7 @@ function onLocationModelLoaded(event) {
         oEvent.getSource().getParent().destroy();
       }
     })
-  }).setModel(locationModel).open();
+  }).setModel(locationModel,"location").open();
 }
 
 function onLocationPress(oEvent) {
