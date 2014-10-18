@@ -16,7 +16,7 @@ building and launching
 
 After installing node.js and npm, clone "demojam14" and install dependencies:
 
-    git clone https://github.com/cambecc/demojam14
+    git clone https://github.com/grahamrobbo/demojam14
     cd demojam14
     npm install
 
