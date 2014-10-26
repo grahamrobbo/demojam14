@@ -55,6 +55,14 @@ var spotDialog = new sap.m.Dialog({
                       enabled: false
                     }),
                     new sap.m.Label({
+                      text: "Your Rating"
+                    }).addStyleClass('sapUI5text'),
+                    new sap.m.RatingIndicator({
+                      maxValue: 5,
+                      value: 1,
+                      enabled: true
+                    }),
+                    new sap.m.Label({
                       text: "Wind"
                     }).addStyleClass('sapUI5text'),
                     new sap.m.Text({
@@ -166,49 +174,49 @@ var spotDialog = new sap.m.Dialog({
             new sap.m.List({
               showSeparators: "Inner",
               items: [
-                new sap.m.FeedListItem({
+                  new sap.m.FeedListItem({
                   sender: "Alexandra Jones",
                   icon: "https://sapui5.ap1.hana.ondemand.com/sdk/test-resources/sap/ui/demokit/explored/img/Woman_11.png",
                   iconDensityAware: false,
                   info: "Request",
-                  timestamp: "March 03, 2014",
-                  text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
+                  timestamp: "October 15, 2014",
+                  text: "#Sunset #Surfing  #Northshore #TurtleBayResort #Oahu #Hawaii #Waves #Ocean @ Turtle Bay Resort http://t.co/glwA8UaHZG"
                 }),
                 new sap.m.FeedListItem({
                   sender: "George Smith",
                   icon: "https://sapui5.ap1.hana.ondemand.com/sdk/test-resources/sap/ui/demokit/explored/img/Man_01.png",
                   iconDensityAware: false,
                   info: "Reply",
-                  timestamp: "March 04, 2014",
-                  text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore "
+                  timestamp: "October 16, 2014",
+                  text: "Sunset surfing.#sunset #surfing #surfer #kuta #newkutabeach #dreamland #bali #love #canonindonesia… http://t.co/efHawcRyim "
                 }),
                 new sap.m.FeedListItem({
-                  sender: "Alexandra Jones",
-                  icon: "https://sapui5.ap1.hana.ondemand.com/sdk/test-resources/sap/ui/demokit/explored/img/Woman_11.png",
+                  sender: "Amanda Thompson",
+                  icon: "https://sapui5.ap1.hana.ondemand.com/sdk/test-resources/sap/ui/demokit/explored/img/Woman_10.png",
                   iconDensityAware: false,
                   info: "Request",
-                  timestamp: "March 05, 2014",
-                  text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
+                  timestamp: "October 18, 2014",
+                  text: "Submarine bliss #surf #underwater #wave #gopro #llandudno @ Llandudno Beach http://t.co/g6Grx5vIEh"
                 }),
                 new sap.m.FeedListItem({
-                  sender: "George Smith",
+                  sender: "Ben Murphy",
                   icon: "https://sapui5.ap1.hana.ondemand.com/sdk/test-resources/sap/ui/demokit/explored/img/Man_01.png",
                   iconDensityAware: false,
                   info: "Rejection",
-                  timestamp: "March 06, 2014",
-                  text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore. At vero eos et accusam et justo duo dolores et ea rebum. "
-                })
+                  timestamp: "October 20, 2014",
+                  text: "#surf and a #rainbow. Good day. #surfing #florida #saltwater #saltlife #surfers @ Indialantic Beach http://t.co/zXlFOKCPTy"
+            })
               ]
             })
           ]
 
         }),
         new sap.m.IconTabFilter({
-          text: 'Another Test',
+          text: 'Sentiment Analysis',
           icon: 'sap-icon://favorite',
           content: [
             new sap.m.Image({
-              src: "/img/surfer-chick.jpg",
+              src: "/img/island.png",
               width: "900px"
             })
           ]
