@@ -323,3 +323,7 @@ body {
     font: 1.3em mplus-2p-light-sub,Helvetica,arial,freesans,clean,sans-serif !important; color:#000000;
     -webkit-font-smoothing: subpixel-antialiased;
 }
+
+#spotDialog-icon {
+    width:200px;
+}

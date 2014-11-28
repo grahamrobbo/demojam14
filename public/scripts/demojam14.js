@@ -14,9 +14,10 @@ var lastCoords = null;
 
 var chartMap = [];
 
-var spotDialog = new sap.m.Dialog({
+var spotDialog = new sap.m.Dialog('spotDialog',{
   class: "sapUiPopupWithPadding",
   stretch: false,
+  icon: '/img/msw_powered_by.png',
   content: [
     new sap.m.IconTabBar('iconTabBar', {
       items: [
@@ -270,7 +271,9 @@ function onLocationModelLoaded(event) {
 
 function onLocationPress(oEvent) {
 
-  spotModel.loadData('http://magicseaweed.com/api/g4954BBp237aO6FRC490k7FjxBQzwRxO/forecast/t/?units=us&spot_id=' + oEvent.getSource().data().spotId);
+  var apiKey = "g4954BBp237aO6FRC490k7FjxBQzwRxO";
+
+  spotModel.loadData('http://magicseaweed.com/api/'+apiKey+'/forecast/t/?units=us&spot_id=' + oEvent.getSource().data().spotId);
 
   spotDialog.setTitle('Surf Analytics - ' + oEvent.getSource().getLabel()).open();
 
